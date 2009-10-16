@@ -1,17 +1,18 @@
-# These are temp files
-*~
-\#*\#
-# OSX things
-._*
-.DS_Store
-# These should never be pushed into the tree
-blib
-pm_to_blib
-Makefile
-Makefile.PL
-META.yml
-*.orig
-Build
-*.tar.*
+.*
+!.gitignore
+Makefile*
+!Makefile.PL
+Build*
+!Build.PL
 _build
-*.patch
+META.yml
+blib
+build
+inc
+pm_to_blib
+MANIFEST*
+!MANIFEST.SKIP
+Debian*
+README
+Catalyst-Plugin-Session-State-Stash-*
+*.bs
