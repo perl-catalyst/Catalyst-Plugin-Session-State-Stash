@@ -1,0 +1,9 @@
+^\.
+\.bak$
+\.swp$
+^_build
+^Build$
+^Catalyst-Plugin-Session-State-Stash-
+^cover_db\b
+^blib\b
+^pm_to_blib$
