@@ -1,4 +1,4 @@
-#!/usr/bin/perl                                                                                                       
+#!/usr/bin/perl
 
 use strict;
 use warnings;
@@ -11,9 +11,16 @@ use Test::MockObject::Extends;
 my $m;
 BEGIN { use_ok( $m = "Catalyst::Plugin::Session::State::Stash" ) }
 
-# Mock a catalyst controller
-my $cxt =
-  Test::MockObject::Extends->new("Catalyst::Plugin::Session::State::Stash");
+# Mock a catalyst context
+{
+    package MockCtx;
+    use base qw/
+        Catalyst::Plugin::Session
+        Catalyst::Plugin::Session::State::Stash
+    /;
+}
+
+my $cxt = Test::MockObject::Extends->new("MockCtx");
 
 $cxt->set_always( config   => {} );
 $cxt->set_always( session  => {} );
@@ -27,7 +34,7 @@ can_ok( $m, "setup_session" );
 
 $cxt->setup_session;
 
-is( $cxt->config->{'session'}{stash_key},
+is( $cxt->config->{'Plugin::Session'}{stash_key},
     '_session', "default cookie name is set" );
 
 can_ok( $m, "get_session_id" );
@@ -38,7 +45,7 @@ $cxt->set_always( stash => { '_session' => {id => 1}, 'session_id' => {id => 2},
 
 is( $cxt->get_session_id, "1", "Pull newfound session id" );
 
-$cxt->config->{'session'}{stash_key} = "session_id";
+$cxt->config->{'Plugin::Session'}{stash_key} = "session_id";
 
 is( $cxt->get_session_id, "2", "Pull session id from second key" );
 

@@ -15,7 +15,7 @@ my $builder = Module::Build->new(
     },
     requires => {
         'MRO::Compat' => 0,
-        'Catalyst::Plugin::Session::State' => 0,
+        'Catalyst::Plugin::Session' => 0.27,
         'Class::Accessor::Fast' => 0,
     },
     add_to_cleanup      => [ 'Catalyst-Plugin-Session-State-Stash-*' ],

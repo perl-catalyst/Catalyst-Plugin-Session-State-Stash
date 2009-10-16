@@ -13,7 +13,7 @@ BEGIN { __PACKAGE__->mk_accessors(qw/_deleted_session_id _prepared/) }
 
 sub _stash_key_components {
     my ($c) = @_;
-    my $config = $c->config->{'Plugin::Session'} || $c->config->{'session'};
+    my $config = $c->_session_plugin_config;
     return ($config->{stash_delim}) ?
         split $config->{stash_delim}, $config->{stash_key} :
         $config->{stash_key};
@@ -29,17 +29,12 @@ sub _get_session {
 
 sub _set_session {
     my ( $c,$key,$value) = @_;
-    
     $c->_get_session->{$key} = $value;
 }
 
 sub setup_session {
     my $c = shift;
-
-    $c->config->{'Plugin::Session'} 
-        and return $c->config->{'Plugin::Session'}->{stash_key} |= '_session';
-    $c->config->{'session'}->{stash_key}
-        ||= '_session';
+    $c->_session_plugin_config->{stash_key} ||= '_session';
 }
 
 sub prepare_action {
@@ -75,7 +70,6 @@ sub get_session_expires {
 
 sub set_session_expires {
     my ( $c, $expires ) = @_;
-    
     $c->_set_session(expires => time() + $expires);
     $c->maybe::next::method($expires)
 }
