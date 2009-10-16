@@ -1,5 +1,8 @@
 Revision history for Catalyst-Plugin-Session-State-Stash
 
+0.12    16 Oct 2009
+        - Use session config handling from Catalyst::Plugin::Session 0.27.
+
 0.11    08 Oct 2009
         - Update to be able to use the new 'Plugin::Session' config key
           as the rest of the Session infrastructure is moving to that.

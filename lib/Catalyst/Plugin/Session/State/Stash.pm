@@ -7,7 +7,7 @@ use strict;
 use warnings;
 use MRO::Compat;
 
-our $VERSION = "0.10";
+our $VERSION = "0.12";
 
 BEGIN { __PACKAGE__->mk_accessors(qw/_deleted_session_id _prepared/) }
 
