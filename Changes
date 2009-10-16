@@ -1,6 +1,6 @@
 Revision history for Catalyst-Plugin-Session-State-Stash
 
-0.11 UNRELEASED
+0.11    08 Oct 2009
         - Update to be able to use the new 'Plugin::Session' config key
           as the rest of the Session infrastructure is moving to that.
         - Move actions out of the application class for TestApp as this
