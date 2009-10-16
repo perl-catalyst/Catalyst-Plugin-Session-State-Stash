@@ -1,7 +1,6 @@
 .*
 !.gitignore
 Makefile*
-!Makefile.PL
 Build*
 !Build.PL
 _build
