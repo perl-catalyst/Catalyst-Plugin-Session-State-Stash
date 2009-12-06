@@ -1,5 +1,10 @@
 Revision history for Catalyst-Plugin-Session-State-Stash
 
+0.13    06 Dec 2009
+        - Switch from CAF to Moose
+        - Switch from Module::Build to Module::Install
+        - Remove use of Test::MockObject
+
 0.12    16 Oct 2009
         - Use session config handling from Catalyst::Plugin::Session 0.27.
 
