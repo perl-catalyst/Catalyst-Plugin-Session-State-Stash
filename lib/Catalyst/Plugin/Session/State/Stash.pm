@@ -158,7 +158,7 @@ If present, splits stash_key at this character to nest. E.g. delim of '/'
 and key of '123/456' will store it as $c->stash->{123}->{456}
 
 =item expires
-    
+
 How long the session should last in seconds.
 
 =back
@@ -180,7 +180,7 @@ is pretty low on my list of priorities.
 Manual work may be involved to make better use of this.
 
 If you are writing a stateful web service with
-L<Catalyst::Plugin::Server::XMLRPC>, you will probably only have to deal with 
+L<Catalyst::Plugin::Server::XMLRPC>, you will probably only have to deal with
 loading, as when saving, the ID will already be on the stash.
 
 =head1 SEE ALSO
@@ -207,4 +207,3 @@ under the same terms as Perl itself.
 
 =cut
 
-1;
