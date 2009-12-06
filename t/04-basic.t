@@ -3,61 +3,68 @@
 use strict;
 use warnings;
 
-use Test::More tests => 10;
-use Test::MockObject;
-use Test::MockObject::Extends;
+use Test::More;
+use Class::MOP;
+use Class::MOP::Class;
 
-# Get a stash
-my $m;
-BEGIN { use_ok( $m = "Catalyst::Plugin::Session::State::Stash" ) }
+use_ok("Catalyst::Plugin::Session::State::Stash" );
+use_ok("Catalyst::Plugin::Session");
 
-# Mock a catalyst context
-{
-    package MockCtx;
-    use base qw/
-        Catalyst::Plugin::Session
+my $ctx_meta = Class::MOP::Class->create_anon_class(
+    superclasses => [qw/
         Catalyst::Plugin::Session::State::Stash
-    /;
-}
+        Catalyst::Plugin::Session
+    /],
+);
 
-my $cxt = Test::MockObject::Extends->new("MockCtx");
-
-$cxt->set_always( config   => {} );
-$cxt->set_always( session  => {} );
-$cxt->set_always( stash    => {} );
-$cxt->set_false("debug");
+$ctx_meta->add_attribute( $_, reader => $_, default => sub { {} } )
+    for qw/config session stash/;;
+$ctx_meta->add_method("debug" => sub { 0 });
 
 my $sessionid;
-$cxt->mock( sessionid => sub { shift; $sessionid = shift if @_; $sessionid } );
+$ctx_meta->add_method( sessionid => sub { shift; $sessionid = shift if @_; $sessionid } );
 
-can_ok( $m, "setup_session" );
+$ctx_meta->make_immutable( replace_constructor => 1 );
+my $app = $ctx_meta->name->new;
 
-$cxt->setup_session;
+isa_ok($app, 'Catalyst::Plugin::Session::State::Stash');
+isa_ok($app, 'Catalyst::Plugin::Session');
 
-is( $cxt->config->{'Plugin::Session'}{stash_key},
+can_ok( $app, 'config');
+can_ok( $app, "setup_session" );
+can_ok( $app, '_session_plugin_config');
+
+$app->setup_session;
+
+is( $app->config->{'Plugin::Session'}{stash_key},
     '_session', "default cookie name is set" );
 
-can_ok( $m, "get_session_id" );
+can_ok( $app, "get_session_id" );
 
-ok( !$cxt->get_session_id, "no session id yet");
+ok( !$app->get_session_id, "no session id yet");
 
-$cxt->set_always( stash => { '_session' => {id => 1}, 'session_id' => {id => 2}, 'other_thing' => { id => 3 } } );
+$app->stash->{ '_session' } = {id => 1};
+$app->stash->{'session_id'} = {id => 2};
+$app->stash->{'other_thing'} = { id => 3 };
 
-is( $cxt->get_session_id, "1", "Pull newfound session id" );
+is( $app->get_session_id, "1", "Pull newfound session id" );
 
-$cxt->config->{'Plugin::Session'}{stash_key} = "session_id";
+$app->config->{'Plugin::Session'}{stash_key} = "session_id";
 
-is( $cxt->get_session_id, "2", "Pull session id from second key" );
+is( $app->get_session_id, "2", "Pull session id from second key" );
 
-can_ok( $m, "set_session_id" );
+can_ok( $app, "set_session_id" );
 
 # Check forwards config compatibility..
-$cxt->config->{'Plugin::Session'} = {};
-$cxt->setup_session;
+$app->config->{'Plugin::Session'} = {};
+$app->setup_session;
 
-is( $cxt->config->{'Plugin::Session'}{stash_key},
+is( $app->config->{'Plugin::Session'}{stash_key},
     '_session', "default cookie name is set when new stash key used" );
 
-$cxt->config->{'Plugin::Session'}{stash_key} = "other_thing";
+$app->config->{'Plugin::Session'}{stash_key} = "other_thing";
 
-is( $cxt->get_session_id, "3", "Pull session id from key in new config" );
+is( $app->get_session_id, "3", "Pull session id from key in new config" );
+
+done_testing;
+
