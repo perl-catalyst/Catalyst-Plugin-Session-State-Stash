@@ -1,15 +1,15 @@
 package Catalyst::Plugin::Session::State::Stash;
-use base qw/Catalyst::Plugin::Session::State Class::Accessor::Fast/;
-
-#Need to look up which version of perl is required.
-#use 5.008;
-use strict;
-use warnings;
+use Moose;
+use 5.008;
 use MRO::Compat;
+use namespace::autoclean;
+
+extends 'Catalyst::Plugin::Session::State';
 
 our $VERSION = "0.12";
 
-BEGIN { __PACKAGE__->mk_accessors(qw/_deleted_session_id _prepared/) }
+has _deleted_session_id => ( is => 'rw' );
+has _prepared => ( is => 'rw' );
 
 sub _stash_key_components {
     my ($c) = @_;
