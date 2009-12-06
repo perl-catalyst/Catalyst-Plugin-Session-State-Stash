@@ -1,8 +1,9 @@
 .*
 !.gitignore
-Makefile*
+Makefile
+Makefile.old
 Build*
-!Build.PL
+Build.PL
 _build
 META.yml
 blib
