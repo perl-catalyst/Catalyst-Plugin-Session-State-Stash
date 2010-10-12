@@ -34,6 +34,9 @@ sub _set_session {
 
 sub setup_session {
     my $c = shift;
+
+    $c->maybe::next::method(@_);
+
     $c->_session_plugin_config->{stash_key} ||= '_session';
 }
 
