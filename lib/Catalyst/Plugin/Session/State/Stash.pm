@@ -6,7 +6,7 @@ use namespace::autoclean;
 
 extends 'Catalyst::Plugin::Session::State';
 
-our $VERSION = "0.13";
+our $VERSION = '0.14';
 
 has _deleted_session_id => ( is => 'rw' );
 has _prepared => ( is => 'rw' );
