@@ -1,5 +1,6 @@
 Revision history for Catalyst-Plugin-Session-State-Stash
 
+{{$NEXT}}
         - allow multiple state objects to work at the same time
           (IKEGAMI, RT#62090)
 
