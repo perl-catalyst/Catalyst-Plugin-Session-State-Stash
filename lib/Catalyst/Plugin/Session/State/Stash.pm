@@ -157,8 +157,8 @@ The name of the hash key to use. Defaults to C<_session>.
 
 =item stash_delim
 
-If present, splits stash_key at this character to nest. E.g. delim of '/'
-and key of '123/456' will store it as $c->stash->{123}->{456}
+If present, splits C<stash_key> at this character to nest. E.g. a C<delim> of '/'
+and C<stash_key> of '123/456' will store it as $c->stash->{123}->{456}
 
 =item expires
 
@@ -166,7 +166,7 @@ How long the session should last in seconds.
 
 =back
 
-For example, you could stick this in MyApp.pm:
+For example, you could stick this in F<MyApp.pm>:
 
   __PACKAGE__->config( 'Plugin::Session' => {
      stash_key  => 'session_id',
@@ -181,6 +181,8 @@ is pretty low on my list of priorities.
 =head1 CAVEATS
 
 Manual work may be involved to make better use of this.
+
+=for stopwords stateful
 
 If you are writing a stateful web service with
 L<Catalyst::Plugin::Server::XMLRPC>, you will probably only have to deal with
