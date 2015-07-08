@@ -1,4 +1,6 @@
 package Catalyst::Plugin::Session::State::Stash;
+# ABSTRACT: Maintain session IDs using the stash
+
 use Moose;
 use 5.008;
 use MRO::Compat;
@@ -91,10 +93,6 @@ __END__
 
 =pod
 
-=head1 NAME
-
-Catalyst::Plugin::Session::State::Stash - Maintain session IDs using the stash
-
 =head1 SYNOPSIS
 
  use Catalyst qw/Session Session::State::Stash Session::Store::Foo/;
@@ -175,8 +173,7 @@ For example, you could stick this in F<MyApp.pm>:
 =head1 BUGS
 
 You can't delete a session then create a new one. If this is important to you,
-patches welcome. It is not important to me and fixing this for completeness
-is pretty low on my list of priorities.
+patches welcome!
 
 =head1 CAVEATS
 
@@ -193,22 +190,17 @@ loading, as when saving, the ID will already be on the stash.
 L<Catalyst>, L<Catalyst::Plugin::Session>, L<Catalyst::Plugin::Session::State>,
 L<Catalyst::Plugin::Session::State::Cookie> (what you probably want).
 
-=head1 AUTHORS
-
-James Laver E<lt>perl -e 'printf qw/%s@%s.com cpan jameslaver/'E<gt>
-
 =head1 CONTRIBUTORS
 
-This module is derived from L<Catalyst::Plugin::Session::State::Cookie> code.
+=over 4
 
+=item *
+This module is derived from L<Catalyst::Plugin::Session::State::Cookie> code.
 Thanks to anyone who wrote code for that.
 
+=item *
 Thanks to Kent Fredric for a patch for nested keys
 
-=head1 COPYRIGHT
-
-This program is free software, you can redistribute it and/or modify it
-under the same terms as Perl itself.
+=back
 
 =cut
-
