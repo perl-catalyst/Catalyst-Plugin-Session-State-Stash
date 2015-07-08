@@ -1,4 +1,4 @@
-#!/usr/bin/perl                                                                                                       
+#!/usr/bin/perl
 
 use strict;
 use warnings;
@@ -44,4 +44,4 @@ TODO: {
     local $TODO = "Changing sessions is broken and I've had no success fixing it. Patches welcome";
     $m->content_is( 'PASS' , 'session id changed' );
 }
-BEGIN { $tests += 4; }  
+BEGIN { $tests += 4; }
