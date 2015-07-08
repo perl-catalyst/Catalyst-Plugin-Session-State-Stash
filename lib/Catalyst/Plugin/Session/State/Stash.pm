@@ -8,7 +8,7 @@ use namespace::autoclean;
 
 extends 'Catalyst::Plugin::Session::State';
 
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 
 has _deleted_session_id => ( is => 'rw' );
 has _prepared => ( is => 'rw' );
