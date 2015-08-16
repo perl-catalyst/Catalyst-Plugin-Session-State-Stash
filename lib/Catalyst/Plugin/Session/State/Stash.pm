@@ -192,15 +192,13 @@ L<Catalyst::Plugin::Session::State::Cookie> (what you probably want).
 
 =head1 CONTRIBUTORS
 
-=over 4
+=begin :list
 
-=item *
-This module is derived from L<Catalyst::Plugin::Session::State::Cookie> code.
-Thanks to anyone who wrote code for that.
+* This module is derived from L<Catalyst::Plugin::Session::State::Cookie> code.
+  Thanks to anyone who wrote code for that.
 
-=item *
-Thanks to Kent Fredric for a patch for nested keys
+* Thanks to Kent Fredric for a patch for nested keys
 
-=back
+=end :list
 
 =cut
