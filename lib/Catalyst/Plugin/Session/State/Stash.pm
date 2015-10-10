@@ -170,7 +170,7 @@ For example, you could stick this in F<MyApp.pm>:
      stash_key  => 'session_id',
   });
 
-=head1 BUGS
+=head1 CAVEATS
 
 You can't delete a session then create a new one. If this is important to you,
 patches welcome!
