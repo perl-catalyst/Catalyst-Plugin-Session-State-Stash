@@ -175,10 +175,6 @@ For example, you could stick this in F<MyApp.pm>:
 You can't delete a session then create a new one. If this is important to you,
 patches welcome!
 
-=head1 CAVEATS
-
-Manual work may be involved to make better use of this.
-
 =for stopwords stateful
 
 If you are writing a stateful web service with
